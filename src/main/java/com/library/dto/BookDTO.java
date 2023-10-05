@@ -1,42 +1,31 @@
-package com.library.entities;
+package com.library.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import java.util.List;
-
-@Entity
-@Table(name = "books")
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
+public class BookDTO {
+    private Long id;
     @NotBlank
     @Size(min = 1, max = 60, message = "title must be between 1 and 60 symbols")
-    @Column(name = "title")
     private String title;
 
     @NotBlank(message = "author is required field")
-    @Column(name = "author")
     private String author;
 
-    public Book() {
+    public BookDTO() {
     }
 
-    public Book(String title, String author) {
+    public BookDTO(Long id, String title, String author) {
+        this.id = id;
         this.title = title;
         this.author = author;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

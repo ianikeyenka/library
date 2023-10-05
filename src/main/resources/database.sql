@@ -8,7 +8,7 @@ library;
 
 CREATE TABLE books
 (
-    id     int NOT NULL AUTO_INCREMENT,
+    id     bigint NOT NULL AUTO_INCREMENT,
     title  varchar(60),
     author varchar(30),
     PRIMARY KEY (id)
@@ -16,7 +16,7 @@ CREATE TABLE books
 
 CREATE TABLE users
 (
-    id           int NOT NULL AUTO_INCREMENT,
+    id           bigint NOT NULL AUTO_INCREMENT,
     name         varchar(15),
     surname      varchar(30),
     phone_number varchar(16),
@@ -25,9 +25,9 @@ CREATE TABLE users
 
 CREATE TABLE borrow_history
 (
-    id       int NOT NULL AUTO_INCREMENT,
-    user_id  int,
-    book_id  int,
+    id       bigint NOT NULL AUTO_INCREMENT,
+    user_id  bigint NOT NULL,
+    book_id  bigint NOT NULL,
     returned BOOLEAN,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users (id),
@@ -50,7 +50,7 @@ INSERT INTO users (id, name, surname, phone_number)
 VALUES (2, 'Eric', 'Murphy', '+375-29-800-3535');
 
 INSERT INTO users (id, name, surname, phone_number)
-VALUES (3, 'Micah', ' James', '+375-25-135-924');
+VALUES (3, 'Micah', ' James', '+375-25-135-9244');
 
 INSERT INTO borrow_history (id, user_id, book_id, returned)
 VALUES (1, 1, 1, false);

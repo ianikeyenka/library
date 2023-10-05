@@ -1,48 +1,37 @@
-package com.library.entities;
+package com.library.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import java.util.List;
-
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
+public class UserDTO {
+    private Long id;
     @NotBlank
     @Size(min = 1, max = 15, message = "name must be between 1 and 15 symbols")
-    @Column(name = "name")
     private String name;
 
     @NotBlank
     @Size(min = 1, max = 30, message = "name must be between 1 and 30 symbols")
-    @Column(name = "surname")
     private String surname;
 
     @Pattern(regexp = "^\\+375-\\d{2}-\\d{3}-\\d{4}$", message = "phone number must be +375-__-__-____")
-    @Column(name = "phone_number")
     private String phone;
 
-    public User() {
+    public UserDTO() {
     }
 
-    public User(String name, String surname, String phone) {
+    public UserDTO(Long id, String name, String surname, String phone) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.phone = phone;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
