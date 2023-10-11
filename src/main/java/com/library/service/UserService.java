@@ -1,6 +1,5 @@
 package com.library.service;
 
-import com.library.dto.BookDTO;
 import com.library.dto.UserDTO;
 
 import java.util.List;
@@ -11,7 +10,7 @@ public interface UserService {
 
     public UserDTO getUserById(Long id);
 
-    public List<BookDTO> getUserBorrowedBooks(Long id);
+    public List<UserDTO> getUsersBorrowedBook(Long id);
 
     public void saveUser(UserDTO userDTO);
 }

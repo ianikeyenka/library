@@ -1,17 +1,15 @@
 package com.library.service.impl;
 
-import com.library.dto.BookDTO;
 import com.library.dto.UserDTO;
 import com.library.entity.Borrow;
 import com.library.entity.User;
-import com.library.mapper.BookMapper;
 import com.library.mapper.UserMapper;
 import com.library.repository.BorrowRepository;
 import com.library.repository.UserRepository;
 import com.library.service.UserService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,10 +25,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-
-    @Autowired
-    private BookMapper bookMapper;
-
 
     @Override
     @Transactional
@@ -55,12 +49,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<BookDTO> getUserBorrowedBooks(Long id) {
-        List<Borrow> borrows = borrowRepository.findByUserId(id);
-        List<BookDTO> books = borrows.stream()
-                .map(borrow -> bookMapper.bookToBookDto(borrow.getBook()))
+    public List<UserDTO> getUsersBorrowedBook(Long id) {
+        List<Borrow> borrows = borrowRepository.findByBookId(id);
+        return borrows.stream()
+                .map(borrow -> userMapper.userToUserDto(borrow.getUser()))
                 .collect(Collectors.toList());
-        return books;
     }
 
     @Override

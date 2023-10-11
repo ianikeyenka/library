@@ -1,11 +1,9 @@
 package com.library.service.impl;
 
 import com.library.dto.BookDTO;
-import com.library.dto.UserDTO;
 import com.library.entity.Book;
 import com.library.entity.Borrow;
 import com.library.mapper.BookMapper;
-import com.library.mapper.UserMapper;
 import com.library.repository.BookRepository;
 import com.library.repository.BorrowRepository;
 import com.library.service.BookService;
@@ -27,9 +25,6 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookMapper bookMapper;
-
-    @Autowired
-    private UserMapper userMapper;
 
     @Override
     @Transactional
@@ -54,12 +49,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public List<UserDTO> getBookBorrowedUsers(Long id) {
-        List<Borrow> borrows = borrowRepository.findByBookId(id);
-        List<UserDTO> users = borrows.stream()
-                .map(borrow -> userMapper.userToUserDto(borrow.getUser()))
+    public List<BookDTO> getBooksBorrowedUser(Long id) {
+        List<Borrow> borrows = borrowRepository.findByUserId(id);
+        return borrows.stream()
+                .map(borrow -> bookMapper.bookToBookDto(borrow.getBook()))
                 .collect(Collectors.toList());
-        return users;
     }
 
     @Override

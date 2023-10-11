@@ -12,12 +12,13 @@ public class Book {
     @Column(name = "id")
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "not be empty")
     @Size(min = 1, max = 60, message = "title must be between 1 and 60 symbols")
     @Column(name = "title")
     private String title;
 
-    @NotBlank(message = "author is required field")
+    @NotBlank(message = "not be empty")
+    @Size(min = 1, max = 30, message = "title must be between 1 and 30 symbols")
     @Column(name = "author")
     private String author;
 

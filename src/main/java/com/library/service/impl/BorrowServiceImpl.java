@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,7 +33,19 @@ public class BorrowServiceImpl implements BorrowService {
 
     @Override
     @Transactional
-    public Borrow saveBorrow(BorrowDTO borrow) {
-        return borrowRepository.save(borrowMapper.borrowDtoToBorrow(borrow));
+    public BorrowDTO getBorrowById(Long id) {
+        Borrow borrow = null;
+        Optional<Borrow> optional = borrowRepository.findById(id);
+        if (optional.isPresent()) {
+            borrow = optional.get();
+        }
+        return borrowMapper.borrowToBorrowDto(borrow);
+    }
+
+    @Override
+    @Transactional
+    public void saveBorrow(BorrowDTO borrowDTO) {
+        Borrow borrow = borrowMapper.borrowDtoToBorrow(borrowDTO);
+        borrowRepository.save(borrow);
     }
 }

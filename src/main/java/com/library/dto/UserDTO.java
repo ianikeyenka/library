@@ -6,15 +6,15 @@ import jakarta.validation.constraints.Size;
 
 public class UserDTO {
     private Long id;
-    @NotBlank
+    @NotBlank(message = "not be empty")
     @Size(min = 1, max = 15, message = "name must be between 1 and 15 symbols")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "not be empty")
     @Size(min = 1, max = 30, message = "name must be between 1 and 30 symbols")
     private String surname;
 
-    @Pattern(regexp = "^\\+375-\\d{2}-\\d{3}-\\d{4}$", message = "phone number must be +375-__-__-____")
+    @Pattern(regexp = "^\\+375-\\d{2}-\\d{3}-\\d{4}$", message = "phone number must be +375-##-###-####")
     private String phone;
 
     public UserDTO() {
@@ -22,9 +22,9 @@ public class UserDTO {
 
     public UserDTO(Long id, String name, String surname, String phone) {
         this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.phone = phone;
+        this.name = name.trim();
+        this.surname = surname.trim();
+        this.phone = phone.trim();
     }
 
     public Long getId() {

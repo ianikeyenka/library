@@ -5,11 +5,12 @@ import jakarta.validation.constraints.Size;
 
 public class BookDTO {
     private Long id;
-    @NotBlank
+    @NotBlank(message = "not be empty")
     @Size(min = 1, max = 60, message = "title must be between 1 and 60 symbols")
     private String title;
 
-    @NotBlank(message = "author is required field")
+    @NotBlank(message = "not be empty")
+    @Size(min = 1, max = 30, message = "title must be between 1 and 30 symbols")
     private String author;
 
     public BookDTO() {
@@ -17,8 +18,8 @@ public class BookDTO {
 
     public BookDTO(Long id, String title, String author) {
         this.id = id;
-        this.title = title;
-        this.author = author;
+        this.title = title.trim();
+        this.author = author.trim();
     }
 
     public Long getId() {

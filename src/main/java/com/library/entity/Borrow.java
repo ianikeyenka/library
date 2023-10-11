@@ -5,20 +5,17 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "borrow_history")
 public class Borrow {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,
-            CascadeType.DETACH, CascadeType.REFRESH,
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH,
             CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,
-            CascadeType.DETACH, CascadeType.REFRESH,
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH,
             CascadeType.MERGE})
     @JoinColumn(name = "book_id")
     private Book book;

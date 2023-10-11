@@ -13,12 +13,12 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "not be empty")
     @Size(min = 1, max = 15, message = "name must be between 1 and 15 symbols")
     @Column(name = "name")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "not be empty")
     @Size(min = 1, max = 30, message = "name must be between 1 and 30 symbols")
     @Column(name = "surname")
     private String surname;
