@@ -5,7 +5,6 @@ import java.util.List;
 
 public class UserBooksDTO {
     private UserDTO user;
-
     private List<BookDTO> books;
 
     public UserBooksDTO(UserDTO user, List<BookDTO> books) {

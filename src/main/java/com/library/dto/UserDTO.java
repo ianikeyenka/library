@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 
 public class UserDTO {
     private Long id;
+
     @NotBlank(message = "not be empty")
     @Size(min = 1, max = 15, message = "name must be between 1 and 15 symbols")
     private String name;

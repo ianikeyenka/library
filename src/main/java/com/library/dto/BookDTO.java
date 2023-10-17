@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Size;
 
 public class BookDTO {
     private Long id;
+
     @NotBlank(message = "not be empty")
     @Size(min = 1, max = 60, message = "title must be between 1 and 60 symbols")
     private String title;

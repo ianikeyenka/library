@@ -2,11 +2,8 @@ package com.library.dto;
 
 public class BorrowDTO {
     private Long id;
-
     private UserDTO user;
-
     private BookDTO book;
-
     private boolean returned;
 
     public BorrowDTO() {

@@ -5,10 +5,7 @@ import com.library.dto.BorrowDTO;
 import java.util.List;
 
 public interface BorrowService {
-
     public List<BorrowDTO> getAllHistory();
-
     public void saveBorrow(BorrowDTO borrow);
-
     public BorrowDTO getBorrowById(Long id);
 }
