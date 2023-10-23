@@ -51,6 +51,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public void saveBook(BookDTO bookDTO) {
         bookRepository.save(bookMapper.bookDtoToBook(bookDTO));
     }

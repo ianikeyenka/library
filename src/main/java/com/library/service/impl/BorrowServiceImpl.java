@@ -31,6 +31,7 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     @Override
+    @Transactional
     public BorrowDTO getBorrowById(Long id) {
         BorrowEntity borrow = borrowRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Borrow with id - " + id + " not found"));
@@ -38,6 +39,7 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     @Override
+    @Transactional
     public void saveBorrow(BorrowDTO borrowDTO) {
         borrowRepository.save(borrowMapper.borrowDtoToBorrow(borrowDTO));
     }
