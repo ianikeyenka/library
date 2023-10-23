@@ -8,6 +8,7 @@ import com.library.mapper.UserMapper;
 import com.library.repository.BorrowRepository;
 import com.library.repository.UserRepository;
 import com.library.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,13 +17,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private BorrowRepository borrowRepository;
-    @Autowired
-    private UserMapper userMapper;
+    private final UserRepository userRepository;
+    private final BorrowRepository borrowRepository;
+    private final UserMapper userMapper;
 
     @Override
     @Transactional
@@ -52,7 +51,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public void saveUser(UserDTO userDTO) {
         userRepository.save(userMapper.userDtoToUser(userDTO));
     }

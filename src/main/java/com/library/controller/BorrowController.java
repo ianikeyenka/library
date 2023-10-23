@@ -3,7 +3,7 @@ package com.library.controller;
 import com.library.dto.BorrowDTO;
 import com.library.service.BorrowService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +12,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class BorrowController {
-    @Autowired
-    private BorrowService borrowService;
+    private final BorrowService borrowService;
 
     @GetMapping("/history")
     public ResponseEntity<List<BorrowDTO>> getHistory() {

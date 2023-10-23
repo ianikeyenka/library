@@ -2,7 +2,15 @@ package com.library.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class BookDTO {
     private Long id;
 
@@ -13,37 +21,4 @@ public class BookDTO {
     @NotBlank(message = "not be empty")
     @Size(min = 1, max = 30, message = "title must be between 1 and 30 symbols")
     private String author;
-
-    public BookDTO() {
-    }
-
-    public BookDTO(Long id, String title, String author) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 }

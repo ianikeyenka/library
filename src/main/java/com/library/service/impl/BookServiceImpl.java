@@ -8,6 +8,7 @@ import com.library.mapper.BookMapper;
 import com.library.repository.BookRepository;
 import com.library.repository.BorrowRepository;
 import com.library.service.BookService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,13 +17,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
-    @Autowired
-    private BookRepository bookRepository;
-    @Autowired
-    private BorrowRepository borrowRepository;
-    @Autowired
-    private BookMapper bookMapper;
+    private final BookRepository bookRepository;
+    private final BorrowRepository borrowRepository;
+    private final BookMapper bookMapper;
 
     @Override
     @Transactional
@@ -35,6 +34,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public BookDTO getBookById(Long id) {
         BookEntity book = bookRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Book with id - " + id + " not found"));
