@@ -61,6 +61,14 @@
             <version>1.4.2.Final</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.22</version>
+            <scope>provided</scope>
+        </dependency>
+
+
     </dependencies>
     <build>
         <plugins>

@@ -1,11 +1,12 @@
 package com.library.mapper;
 
 import com.library.dto.BookDTO;
-import com.library.entity.Book;
+import com.library.entity.BookEntity;
 import org.mapstruct.Mapper;
 
 @Mapper
 public interface BookMapper {
-    BookDTO bookToBookDto(Book book);
-    Book bookDtoToBook(BookDTO bookDTO);
+    BookDTO bookToBookDto(BookEntity book);
+
+    BookEntity bookDtoToBook(BookDTO bookDTO);
 }

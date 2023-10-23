@@ -23,9 +23,9 @@ public class UserDTO {
 
     public UserDTO(Long id, String name, String surname, String phone) {
         this.id = id;
-        this.name = name.trim();
-        this.surname = surname.trim();
-        this.phone = phone.trim();
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
     }
 
     public Long getId() {

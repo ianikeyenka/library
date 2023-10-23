@@ -1,31 +1,30 @@
 package com.library.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "books")
-public class Book {
+public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @NotBlank(message = "not be empty")
-    @Size(min = 1, max = 60, message = "title must be between 1 and 60 symbols")
     @Column(name = "title")
     private String title;
 
-    @NotBlank(message = "not be empty")
-    @Size(min = 1, max = 30, message = "title must be between 1 and 30 symbols")
     @Column(name = "author")
     private String author;
 
-    public Book() {
+    public BookEntity() {
     }
 
-    public Book(String title, String author) {
+    public BookEntity(String title, String author) {
         this.title = title;
         this.author = author;
     }

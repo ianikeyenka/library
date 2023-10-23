@@ -1,8 +1,9 @@
 package com.library.service.impl;
 
 import com.library.dto.UserDTO;
-import com.library.entity.Borrow;
-import com.library.entity.User;
+import com.library.entity.BorrowEntity;
+import com.library.entity.UserEntity;
+import com.library.exception.ResourceNotFoundException;
 import com.library.mapper.UserMapper;
 import com.library.repository.BorrowRepository;
 import com.library.repository.UserRepository;
@@ -12,17 +13,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private BorrowRepository borrowRepository;
-
     @Autowired
     private UserMapper userMapper;
 
@@ -39,18 +37,15 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDTO getUserById(Long id) {
-        User user = null;
-        Optional<User> optional = userRepository.findById(id);
-        if (optional.isPresent()) {
-            user = optional.get();
-        }
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User with id - " + id + " not found"));
         return userMapper.userToUserDto(user);
     }
 
     @Override
     @Transactional
     public List<UserDTO> getUsersBorrowedBook(Long id) {
-        List<Borrow> borrows = borrowRepository.findByBookId(id);
+        List<BorrowEntity> borrows = borrowRepository.findAllByBookId(id);
         return borrows.stream()
                 .map(borrow -> userMapper.userToUserDto(borrow.getUser()))
                 .collect(Collectors.toList());

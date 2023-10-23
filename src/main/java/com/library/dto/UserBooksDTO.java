@@ -1,11 +1,13 @@
 package com.library.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserBooksDTO {
     private UserDTO user;
     private List<BookDTO> books;
+
+    public UserBooksDTO() {
+    }
 
     public UserBooksDTO(UserDTO user, List<BookDTO> books) {
         this.user = user;
@@ -21,7 +23,7 @@ public class UserBooksDTO {
     }
 
     public List<BookDTO> getBooks() {
-        return new ArrayList<>(books);
+        return books;
     }
 
     public void setBooks(List<BookDTO> books) {

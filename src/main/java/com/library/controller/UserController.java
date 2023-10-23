@@ -6,62 +6,43 @@ import com.library.service.BookService;
 import com.library.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/library/users")
+import java.util.List;
+
+@RestController
+@RequestMapping("/api")
 public class UserController {
     @Autowired
     private UserService userService;
-
     @Autowired
     private BookService bookService;
 
-    @GetMapping()
-    public String getAllUsers(Model model) {
-        model.addAttribute("users", userService.getUsers());
-        return "user/index";
+    @GetMapping("/users")
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public String getUser(@PathVariable Long id, Model model) {
-        model.addAttribute("user",
-                new UserBooksDTO(userService.getUserById(id), bookService.getBooksBorrowedUser(id)));
-        return "user/show";
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserBooksDTO> getUser(@PathVariable Long id) {
+        return new ResponseEntity<>(new UserBooksDTO(userService.getUserById(id),
+                bookService.getBooksBorrowedUser(id)), HttpStatus.OK);
     }
 
-    @GetMapping("/add-user")
-    public String addNewBook(Model model) {
-        model.addAttribute("user", new UserDTO());
-        return "user/new";
-    }
-
-    @PostMapping("/save-user")
-    public String saveBook(@ModelAttribute("user") @Valid UserDTO userDTO,
-                           BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "user/new";
-        }
+    @PostMapping("/users")
+    public ResponseEntity<UserDTO> saveBook(@Valid @RequestBody UserDTO userDTO) {
+        userDTO.setId(0L);
         userService.saveUser(userDTO);
-        return "redirect:/library/users";
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/edit")
-    public String editBook(@PathVariable Long id, Model model) {
-        model.addAttribute("user", userService.getUserById(id));
-        return "user/edit";
-    }
 
-    @RequestMapping("/{id}")
-    public String updateBook(@ModelAttribute("user") @Valid UserDTO userDTO,
-                             BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "user/edit";
-        }
+    @PutMapping("/users/{id}")
+    public ResponseEntity<UserDTO> updateBook(@PathVariable Long id, @Valid @RequestBody UserDTO userDTO) {
+        userDTO.setId(id);
         userService.saveUser(userDTO);
-        return "redirect:/library/users";
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 }

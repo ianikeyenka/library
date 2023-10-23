@@ -1,8 +1,9 @@
 package com.library.service.impl;
 
 import com.library.dto.BookDTO;
-import com.library.entity.Book;
-import com.library.entity.Borrow;
+import com.library.entity.BookEntity;
+import com.library.entity.BorrowEntity;
+import com.library.exception.ResourceNotFoundException;
 import com.library.mapper.BookMapper;
 import com.library.repository.BookRepository;
 import com.library.repository.BorrowRepository;
@@ -12,17 +13,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepository;
-
     @Autowired
     private BorrowRepository borrowRepository;
-
     @Autowired
     private BookMapper bookMapper;
 
@@ -37,27 +35,22 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public BookDTO getBookById(Long id) {
-        Book book = null;
-        Optional<Book> optional = bookRepository.findById(id);
-        if (optional.isPresent()) {
-            book = optional.get();
-        }
+        BookEntity book = bookRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Book with id - " + id + " not found"));
         return bookMapper.bookToBookDto(book);
     }
 
     @Override
     @Transactional
     public List<BookDTO> getBooksBorrowedUser(Long id) {
-        List<Borrow> borrows = borrowRepository.findByUserId(id);
+        List<BorrowEntity> borrows = borrowRepository.findAllByUserId(id);
         return borrows.stream()
                 .map(borrow -> bookMapper.bookToBookDto(borrow.getBook()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    @Transactional
     public void saveBook(BookDTO bookDTO) {
         bookRepository.save(bookMapper.bookDtoToBook(bookDTO));
     }

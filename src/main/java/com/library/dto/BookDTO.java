@@ -19,8 +19,8 @@ public class BookDTO {
 
     public BookDTO(Long id, String title, String author) {
         this.id = id;
-        this.title = title.trim();
-        this.author = author.trim();
+        this.title = title;
+        this.author = author;
     }
 
     public Long getId() {

@@ -1,36 +1,33 @@
 package com.library.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @NotBlank(message = "not be empty")
-    @Size(min = 1, max = 15, message = "name must be between 1 and 15 symbols")
     @Column(name = "name")
     private String name;
 
-    @NotBlank(message = "not be empty")
-    @Size(min = 1, max = 30, message = "name must be between 1 and 30 symbols")
     @Column(name = "surname")
     private String surname;
 
-    @Pattern(regexp = "^\\+375-\\d{2}-\\d{3}-\\d{4}$", message = "phone number must be +375-__-__-____")
     @Column(name = "phone_number")
     private String phone;
 
-    public User() {
+    public UserEntity() {
     }
 
-    public User(String name, String surname, String phone) {
+    public UserEntity(String name, String surname, String phone) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;

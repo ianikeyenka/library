@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface BorrowService {
     public List<BorrowDTO> getAllHistory();
-    public void saveBorrow(BorrowDTO borrow);
+
     public BorrowDTO getBorrowById(Long id);
+
+    public void saveBorrow(BorrowDTO borrow);
 }

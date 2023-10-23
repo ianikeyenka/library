@@ -1,6 +1,5 @@
 package com.library.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookUsersDTO {
@@ -24,7 +23,7 @@ public class BookUsersDTO {
     }
 
     public List<UserDTO> getUsers() {
-        return new ArrayList<>(users);
+        return users;
     }
 
     public void setUsers(List<UserDTO> users) {

@@ -1,11 +1,12 @@
 package com.library.mapper;
 
 import com.library.dto.UserDTO;
-import com.library.entity.User;
+import com.library.entity.UserEntity;
 import org.mapstruct.Mapper;
 
 @Mapper
 public interface UserMapper {
-    UserDTO userToUserDto(User user);
-    User userDtoToUser(UserDTO userDTO);
+    UserDTO userToUserDto(UserEntity user);
+
+    UserEntity userDtoToUser(UserDTO userDTO);
 }
